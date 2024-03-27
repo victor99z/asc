@@ -1,0 +1,876 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={R Notebook},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{R Notebook}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+\hypertarget{lista-de-anuxe1lise-exploratoria}{%
+\subsection{Lista de análise
+exploratoria}\label{lista-de-anuxe1lise-exploratoria}}
+
+\hypertarget{questuxf5es-8-em-diante}{%
+\subsubsection{Questões 8 em diante}\label{questuxf5es-8-em-diante}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Um administrador de rede decidiu medir o tempo de carga da página
+  principal de um portal Internet; os tempos observados, em
+  milissegundos, estão no arquivo de dados globo.dat.
+\end{enumerate}
+
+\begin{enumerate}
+\def\labelenumi{(\alph{enumi})}
+\tightlist
+\item
+  Qual o tempo típico de carga da página?
+\item
+  Espera-se que o tempo de carga seja inferior a 600 ms em pelo menos
+  98\% dos casos. Isso está ocorrendo na prática
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{globo\_data }\OtherTok{\textless{}{-}} \FunctionTok{read.table}\NormalTok{(}\StringTok{"./asc{-}dados/globo.dat"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(globo\_data}\SpecialCharTok{$}\NormalTok{V1)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercicios_exploratoria_files/figure-latex/unnamed-chunk-2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(globo\_data}\SpecialCharTok{$}\NormalTok{V1[globo\_data}\SpecialCharTok{$}\NormalTok{V1 }\SpecialCharTok{\textgreater{}} \DecValTok{1000}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 38454 19597
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{globo2 }\OtherTok{\textless{}{-}}\NormalTok{ globo\_data[}\SpecialCharTok{!}\NormalTok{(globo\_data }\SpecialCharTok{==} \DecValTok{0} \SpecialCharTok{|}\NormalTok{ globo\_data }\SpecialCharTok{\textgreater{}} \DecValTok{1000}\NormalTok{)]}
+\FunctionTok{hist}\NormalTok{(globo2)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercicios_exploratoria_files/figure-latex/unnamed-chunk-3-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(globo2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   143.0   493.8   512.0   516.5   532.2   838.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{globo3 }\OtherTok{\textless{}{-}}\NormalTok{ globo\_data[globo\_data }\SpecialCharTok{!=} \DecValTok{0}\NormalTok{]}
+\FunctionTok{sum}\NormalTok{(globo3 }\SpecialCharTok{\textless{}} \DecValTok{600}\NormalTok{) }\SpecialCharTok{/} \FunctionTok{length}\NormalTok{(globo3) }
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.9738956
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Quase 98\% da requisções ficaram abaixo de 600ms porem quase não é ficar rs;}
+\end{Highlighting}
+\end{Shaded}
+
+Exercicio 9.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{pacotes }\OtherTok{\textless{}{-}} \FunctionTok{read.table}\NormalTok{(}\StringTok{"./asc{-}dados/pacotes.dat"}\NormalTok{, }\AttributeTok{head=}\NormalTok{T)}
+\FunctionTok{summary}\NormalTok{(pacotes}\SpecialCharTok{$}\NormalTok{tam)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    40.0    52.0  1500.0   947.3  1500.0  1500.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(pacotes}\SpecialCharTok{$}\NormalTok{tam, }\AttributeTok{breaks =} \DecValTok{100}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercicios_exploratoria_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{boxplot}\NormalTok{(pacotes}\SpecialCharTok{$}\NormalTok{tam)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercicios_exploratoria_files/figure-latex/unnamed-chunk-5-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{plot}\NormalTok{(pacotes}\SpecialCharTok{$}\NormalTok{tam)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercicios_exploratoria_files/figure-latex/unnamed-chunk-5-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(pacotes}\SpecialCharTok{$}\NormalTok{tam }\SpecialCharTok{\textgreater{}} \DecValTok{1000}\NormalTok{) }\SpecialCharTok{/} \FunctionTok{length}\NormalTok{(pacotes}\SpecialCharTok{$}\NormalTok{tam)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.6141
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sum}\NormalTok{(pacotes}\SpecialCharTok{$}\NormalTok{tam }\SpecialCharTok{\textless{}} \DecValTok{100}\NormalTok{) }\SpecialCharTok{/} \FunctionTok{length}\NormalTok{(pacotes}\SpecialCharTok{$}\NormalTok{tam)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3028
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Dificil usar média, moda ou mediana neste caso, os dados estão distribuidos nas pontas (30\% dos dados são menores ou iguas a 100ms e 61\% são maiores que 1000ms) oque dificulda a analise.}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{table}\NormalTok{(pacotes}\SpecialCharTok{$}\NormalTok{tam)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+##   40   50   52   57   60   64   66   72   78   80   86   89   90   92   93   96 
+##    7    4 2814    6    1   18    1   14   92   41    2    6    2    3    8    8 
+##   99  105  109  111  112  118  122  123  125  126  138  142  143  153  158  163 
+##    1   15   11    3    2   63    3   55  563   15    1    5    2    3    4    2 
+##  169  174  209  215  217  222  227  229  240  248  249  256  263  273  276  277 
+##    2    4    4    4    5    3    6    1    1    1    1    1    2    8    1    1 
+##  290  300  326  340  411  459  468  505  506  515  517  520  548  583  756  945 
+##    1    8    2    1    2    1    2    2    2    1    2    2    8    1    2    1 
+##  955 1004 1044 1124 1186 1252 1322 1332 1460 1470 1500 
+##    1    3    4    1    1   74    1    1    1    1 6054
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{sort}\NormalTok{(}\FunctionTok{table}\NormalTok{(pacotes}\SpecialCharTok{$}\NormalTok{tam), }\AttributeTok{decreasing =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 1500   52  125   78 1252  118  123   80   64  105  126   72  109   93   96  273 
+## 6054 2814  563   92   74   63   55   41   18   15   15   14   11    8    8    8 
+##  300  548   40   57   89  227  142  217   50  158  174  209  215 1044   92  111 
+##    8    8    7    6    6    6    5    5    4    4    4    4    4    4    3    3 
+##  122  153  222 1004   86   90  112  143  163  169  263  326  411  468  505  506 
+##    3    3    3    3    2    2    2    2    2    2    2    2    2    2    2    2 
+##  517  520  756   60   66   99  138  229  240  248  249  256  276  277  290  340 
+##    2    2    2    1    1    1    1    1    1    1    1    1    1    1    1    1 
+##  459  515  583  945  955 1124 1186 1322 1332 1460 1470 
+##    1    1    1    1    1    1    1    1    1    1    1
+\end{verbatim}
+
+Exercicio 10
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{sgbd }\OtherTok{\textless{}{-}} \FunctionTok{read.table}\NormalTok{(}\StringTok{"./asc{-}dados/trbd.dat"}\NormalTok{, }\AttributeTok{head=}\NormalTok{T)}
+\FunctionTok{head}\NormalTok{(sgbd)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   tr.bd
+## 1    83
+## 2    36
+## 3    35
+## 4    37
+## 5    47
+## 6    74
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(sgbd}\SpecialCharTok{$}\NormalTok{tr.bd)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercicios_exploratoria_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(sgbd}\SpecialCharTok{$}\NormalTok{tr.bd)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   20.00   35.00   44.50   47.15   57.00   95.00
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{CV }\OtherTok{\textless{}{-}} \ControlFlowTok{function}\NormalTok{(x) \{ }\FunctionTok{sd}\NormalTok{(x) }\SpecialCharTok{/} \FunctionTok{mean}\NormalTok{(x) \} }\CommentTok{\# Coefiecente de variação}
+
+\FunctionTok{CV}\NormalTok{(sgbd}\SpecialCharTok{$}\NormalTok{tr.bd)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0.3452368
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Vazão maxima será quando a resposta for minima}
+\CommentTok{\# 50 consultas por segundo, sendo a consulta minima 20ms}
+\end{Highlighting}
+\end{Shaded}
+
+Exercicio 11
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{users }\OtherTok{\textless{}{-}} \FunctionTok{read.table}\NormalTok{(}\StringTok{"./asc{-}dados/usuarios.dat"}\NormalTok{, }\AttributeTok{head=}\NormalTok{T)}
+
+\FunctionTok{summary}\NormalTok{(users)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    horario              users      
+##  Length:600         Min.   : 51.0  
+##  Class :character   1st Qu.:172.8  
+##  Mode  :character   Median :201.0  
+##                     Mean   :190.3  
+##                     3rd Qu.:219.2  
+##                     Max.   :269.0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(users}\SpecialCharTok{$}\NormalTok{users)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercicios_exploratoria_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Min 51.0 }
+\CommentTok{\# Max 269.0}
+
+\CommentTok{\# Horarios}
+
+\CommentTok{\# pode tbm usar which com o dataframe}
+\NormalTok{(users}\SpecialCharTok{$}\NormalTok{horario[users}\SpecialCharTok{$}\NormalTok{users }\SpecialCharTok{==} \FunctionTok{max}\NormalTok{(users}\SpecialCharTok{$}\NormalTok{users)])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "16:45"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{(users}\SpecialCharTok{$}\NormalTok{horario[users}\SpecialCharTok{$}\NormalTok{users }\SpecialCharTok{==} \FunctionTok{min}\NormalTok{(users}\SpecialCharTok{$}\NormalTok{users)])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "12:20"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# B) Divide em 3 periodos e pega media,mediana {-}\textgreater{} faz sentido}
+\CommentTok{\# Numero tipico de usuarios = mediana = 201.0}
+
+\CommentTok{\# Horarios acima do medido na analise}
+\NormalTok{(users}\SpecialCharTok{$}\NormalTok{horario[users}\SpecialCharTok{$}\NormalTok{users }\SpecialCharTok{\textgreater{}} \DecValTok{260}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "09:11" "14:44" "14:45" "14:57" "15:33" "15:47" "16:45" "16:50"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Assimetria, lado que está a cauda}
+
+\CommentTok{\# Plota o dataframe}
+\FunctionTok{plot}\NormalTok{(users}\SpecialCharTok{$}\NormalTok{users, }\AttributeTok{xaxt=}\StringTok{"n"}\NormalTok{)}
+\FunctionTok{axis}\NormalTok{(}\DecValTok{1}\NormalTok{, }\AttributeTok{at =}\DecValTok{1}\SpecialCharTok{:}\DecValTok{600}\NormalTok{, }\AttributeTok{labels=}\NormalTok{users}\SpecialCharTok{$}\NormalTok{horario)}
+\FunctionTok{abline}\NormalTok{(}\AttributeTok{v=}\FunctionTok{c}\NormalTok{(}\DecValTok{241}\NormalTok{,}\DecValTok{360}\NormalTok{), }\AttributeTok{lty=}\DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercicios_exploratoria_files/figure-latex/unnamed-chunk-8-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{users[}\FunctionTok{which}\NormalTok{(users}\SpecialCharTok{$}\NormalTok{users }\SpecialCharTok{\textgreater{}} \DecValTok{260}\NormalTok{), ]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     horario users
+## 71    09:11   261
+## 404   14:44   262
+## 405   14:45   266
+## 417   14:57   262
+## 453   15:33   263
+## 467   15:47   264
+## 525   16:45   269
+## 530   16:50   263
+\end{verbatim}
+
+\hfill\break
+Exer 12.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tmp }\OtherTok{\textless{}{-}} \FunctionTok{read.table}\NormalTok{(}\StringTok{"./asc{-}dados/aed{-}tcons.dat"}\NormalTok{, }\AttributeTok{head=}\NormalTok{T)}
+\FunctionTok{hist}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S1) }\CommentTok{\# Assimemtrica a direita}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercicios_exploratoria_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S2) }\CommentTok{\# bimodal simetrica}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercicios_exploratoria_files/figure-latex/unnamed-chunk-9-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S3) }\CommentTok{\# Simetrica}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercicios_exploratoria_files/figure-latex/unnamed-chunk-9-3.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{hist}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S4) }\CommentTok{\# Assimetrica a esquerda}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{exercicios_exploratoria_files/figure-latex/unnamed-chunk-9-4.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   16.94   43.02   50.65   50.05   56.51   89.86
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"{-}{-}"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "--"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{summary}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   7.383  20.386  34.502  35.205  50.080  64.402
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# b) Calcule o 3o quartil, o 90o e o 95o percentis dos tempos de consulta de S4.}
+
+\CommentTok{\# summary(tmp$S4) \#  3rd Quartil: 69.89}
+\FunctionTok{quantile}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S4, }\FloatTok{0.75}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    75% 
+## 69.886
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{quantile}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S4, }\FloatTok{0.90}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      90% 
+## 100.1858
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{quantile}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S4, }\FloatTok{0.95}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      95% 
+## 116.7008
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# (c) Calcule a mediana, a média aritmética e média truncada a 5\% para os tempos de consulta de S1 e S3. Como o truncamento afeta a média de cada sistema?}
+
+\FunctionTok{median}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 84.749
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S1)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 79.64171
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S1, }\AttributeTok{trim =} \FloatTok{0.05}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 81.03633
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(}\StringTok{"\#\#\#"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "###"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{median}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 50.648
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S3)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 50.05369
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{mean}\NormalTok{(tmp}\SpecialCharTok{$}\NormalTok{S3, }\AttributeTok{trim =} \FloatTok{0.05}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 50.10067
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Aumenta a média, visto que o valores (5\%) maiores e menores cairam fora}
+
+\CommentTok{\# D}
+\CommentTok{\# ECDF1 {-} Ae}
+\CommentTok{\# ECDF2 {-} BM}
+\CommentTok{\# ECDF3 {-} US}
+\CommentTok{\# ECDF4 {-} AD}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Plota tudo juntinho do lado}
+\FunctionTok{par}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## $xlog
+## [1] FALSE
+## 
+## $ylog
+## [1] FALSE
+## 
+## $adj
+## [1] 0.5
+## 
+## $ann
+## [1] TRUE
+## 
+## $ask
+## [1] FALSE
+## 
+## $bg
+## [1] "transparent"
+## 
+## $bty
+## [1] "o"
+## 
+## $cex
+## [1] 1
+## 
+## $cex.axis
+## [1] 1
+## 
+## $cex.lab
+## [1] 1
+## 
+## $cex.main
+## [1] 1.2
+## 
+## $cex.sub
+## [1] 1
+## 
+## $cin
+## [1] 0.15 0.20
+## 
+## $col
+## [1] "black"
+## 
+## $col.axis
+## [1] "black"
+## 
+## $col.lab
+## [1] "black"
+## 
+## $col.main
+## [1] "black"
+## 
+## $col.sub
+## [1] "black"
+## 
+## $cra
+## [1] 10.8 14.4
+## 
+## $crt
+## [1] 0
+## 
+## $csi
+## [1] 0.2
+## 
+## $cxy
+## [1] 0.02851711 0.07518797
+## 
+## $din
+## [1] 6.5 4.5
+## 
+## $err
+## [1] 0
+## 
+## $family
+## [1] ""
+## 
+## $fg
+## [1] "black"
+## 
+## $fig
+## [1] 0 1 0 1
+## 
+## $fin
+## [1] 6.5 4.5
+## 
+## $font
+## [1] 1
+## 
+## $font.axis
+## [1] 1
+## 
+## $font.lab
+## [1] 1
+## 
+## $font.main
+## [1] 2
+## 
+## $font.sub
+## [1] 1
+## 
+## $lab
+## [1] 5 5 7
+## 
+## $las
+## [1] 0
+## 
+## $lend
+## [1] "round"
+## 
+## $lheight
+## [1] 1
+## 
+## $ljoin
+## [1] "round"
+## 
+## $lmitre
+## [1] 10
+## 
+## $lty
+## [1] "solid"
+## 
+## $lwd
+## [1] 1
+## 
+## $mai
+## [1] 1.02 0.82 0.82 0.42
+## 
+## $mar
+## [1] 5.1 4.1 4.1 2.1
+## 
+## $mex
+## [1] 1
+## 
+## $mfcol
+## [1] 1 1
+## 
+## $mfg
+## [1] 1 1 1 1
+## 
+## $mfrow
+## [1] 1 1
+## 
+## $mgp
+## [1] 3 1 0
+## 
+## $mkh
+## [1] 0.001
+## 
+## $new
+## [1] FALSE
+## 
+## $oma
+## [1] 0 0 0 0
+## 
+## $omd
+## [1] 0 1 0 1
+## 
+## $omi
+## [1] 0 0 0 0
+## 
+## $page
+## [1] TRUE
+## 
+## $pch
+## [1] 1
+## 
+## $pin
+## [1] 5.26 2.66
+## 
+## $plt
+## [1] 0.1261538 0.9353846 0.2266667 0.8177778
+## 
+## $ps
+## [1] 12
+## 
+## $pty
+## [1] "m"
+## 
+## $smo
+## [1] 1
+## 
+## $srt
+## [1] 0
+## 
+## $tck
+## [1] NA
+## 
+## $tcl
+## [1] -0.5
+## 
+## $usr
+## [1] 0 1 0 1
+## 
+## $xaxp
+## [1] 0 1 5
+## 
+## $xaxs
+## [1] "r"
+## 
+## $xaxt
+## [1] "s"
+## 
+## $xpd
+## [1] FALSE
+## 
+## $yaxp
+## [1] 0 1 5
+## 
+## $yaxs
+## [1] "r"
+## 
+## $yaxt
+## [1] "s"
+## 
+## $ylbias
+## [1] 0.2
+\end{verbatim}
+
+\end{document}

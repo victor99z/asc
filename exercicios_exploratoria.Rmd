@@ -1,6 +1,8 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  pdf_document: default
+  html_notebook: default
 ---
 
 ## Lista de análise exploratoria
@@ -80,20 +82,30 @@ Exercicio 11
 users <- read.table("./asc-dados/usuarios.dat", head=T)
 
 summary(users)
+hist(users$users)
 # Min 51.0 
 # Max 269.0
 
 # Horarios
 
+# pode tbm usar which com o dataframe
 (users$horario[users$users == max(users$users)])
 (users$horario[users$users == min(users$users)])
 
+# B) Divide em 3 periodos e pega media,mediana -> faz sentido
 # Numero tipico de usuarios = mediana = 201.0
 
 # Horarios acima do medido na analise
 (users$horario[users$users > 260])
 
+# Assimetria, lado que está a cauda
 
+# Plota o dataframe
+plot(users$users, xaxt="n")
+axis(1, at =1:600, labels=users$horario)
+abline(v=c(241,360), lty=2)
+
+users[which(users$users > 260), ]
 
 ```
 
@@ -140,9 +152,16 @@ mean(tmp$S3, trim = 0.05)
 # Aumenta a média, visto que o valores (5%) maiores e menores cairam fora
 
 # D
-# ECDF1 - s3
-# ECDF2 - s4
-# ECDF3 - s2
-# ECDF4 - s1
+# ECDF1 - AE
+# ECDF2 - BM
+# ECDF3 - US
+# ECDF4 - AD
+
+```
+
+```{r}
+# Plota tudo juntinho do lado
+par()
+
 
 ```

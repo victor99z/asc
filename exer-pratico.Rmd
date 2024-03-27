@@ -1,0 +1,36 @@
+---
+title: "R Notebook"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+# Análise
+
+-   Conjunto de 10 requisições coletadass se mostrou inconclusiva devido a poucas amostras;
+
+-   Com 100 amostras coletadas o resultado do histograma foi uma distribuição assimetrica a direita;
+
+-   Grande parte das requisições (59%) foram feitas abaixo de 1s
+
+## Comparando o histograma coletado para 10 req e 100 req:
+
+```{r}
+tempos10 <- read.table("./saida10")
+tempos100 <- read.table("./saida100")
+
+par(mfrow = c(1,2))
+
+hist(tempos10$V1)
+hist(tempos100$V1)
+
+```
+
+```{r}
+sum(tempos100$V1 <= 1)/length(tempos100$V1)
+sum(tempos100$V1 <= 2)/length(tempos100$V1)
+
+boxplot(tempos100$V1, horizontal = T)
+summary(tempos100$V1)
+```
