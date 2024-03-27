@@ -9,9 +9,8 @@ output: html_notebook
 
 8.  Um administrador de rede decidiu medir o tempo de carga da página principal de um portal Internet; os tempos observados, em milissegundos, estão no arquivo de dados globo.dat.
 
-```{=html}
 <!-- -->
-```
+
 (a) Qual o tempo típico de carga da página?
 (b) Espera-se que o tempo de carga seja inferior a 600 ms em pelo menos 98% dos casos. Isso está ocorrendo na prática
 
@@ -26,4 +25,66 @@ boxplot(globo_data$V1)
 
 ```
 
+```{r}
+globo2 <- globo_data[!(globo_data == 0 | globo_data > 1000)]
+hist(globo2)
+summary(globo2)
+```
 
+```{r}
+globo3 <- globo_data[globo_data != 0]
+sum(globo3 < 600) / length(globo3) 
+# Quase 98% da requisções ficaram abaixo de 600ms porem quase não é ficar rs;
+```
+
+Exercicio 9.
+
+```{r}
+pacotes <- read.table("./asc-dados/pacotes.dat", head=T)
+summary(pacotes$tam)
+hist(pacotes$tam, breaks = 100)
+boxplot(pacotes$tam)
+plot(pacotes$tam)
+sum(pacotes$tam > 1000) / length(pacotes$tam)
+sum(pacotes$tam < 100) / length(pacotes$tam)
+
+# Dificil usar média, moda ou mediana neste caso, os dados estão distribuidos nas pontas (30% dos dados são menores ou iguas a 100ms e 61% são maiores que 1000ms) oque dificulda a analise.
+
+```
+
+```{r}
+table(pacotes$tam)
+sort(table(pacotes$tam), decreasing = T)
+```
+
+Exercicio 10
+
+```{r}
+sgbd <- read.table("./asc-dados/trbd.dat", head=T)
+head(sgbd)
+hist(sgbd$tr.bd)
+summary(sgbd$tr.bd)
+CV <- function(x) { sd(x) / mean(x) } # Coefiecente de variação
+
+CV(sgbd$tr.bd)
+
+# Vazão maxima será quando a resposta for minima
+# 50 consultas por segundo, sendo a consulta minima 20ms
+
+```
+
+Exercicio 11
+
+```{r}
+
+users <- read.table("./asc-dados/usuarios.dat", head=T)
+
+summary(users)
+# Min 51.0 
+# Max 269.0
+
+# Horarios
+
+(users$horario[max(users$users)])
+
+```

@@ -1787,10 +1787,81 @@ estão no arquivo de dados globo.dat.</li>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xvYm8yIDwtIGdsb2JvX2RhdGFbIShnbG9ib19kYXRhID09IDAgfCBnbG9ib19kYXRhID4gMTAwMCldXG5oaXN0KGdsb2JvMilcbnN1bW1hcnkoZ2xvYm8yKVxuYGBgIn0= -->
+<pre class="r"><code>globo2 &lt;- globo_data[!(globo_data == 0 | globo_data &gt; 1000)]
+hist(globo2)
+summary(globo2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2xvYm8zIDwtIGdsb2JvX2RhdGFbZ2xvYm9fZGF0YSAhPSAwXVxuc3VtKGdsb2JvMyA8IDYwMCkgLyBsZW5ndGgoZ2xvYm8zKSBcbiMgUXVhc2UgOTglIGRhIHJlcXVpc8Onw7VlcyBmaWNhcmFtIGFiYWl4byBkZSA2MDBtcyBwb3JlbSBxdWFzZSBuw6NvIMOpIGZpY2FyIHJzO1xuYGBgIn0= -->
+<pre class="r"><code>globo3 &lt;- globo_data[globo_data != 0]
+sum(globo3 &lt; 600) / length(globo3) 
+# Quase 98% da requisções ficaram abaixo de 600ms porem quase não é ficar rs;</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Exercicio 9.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGFjb3RlcyA8LSByZWFkLnRhYmxlKFwiLi9hc2MtZGFkb3MvcGFjb3Rlcy5kYXRcIiwgaGVhZD1UKVxuc3VtbWFyeShwYWNvdGVzJHRhbSlcbmhpc3QocGFjb3RlcyR0YW0sIGJyZWFrcyA9IDEwMClcbmJveHBsb3QocGFjb3RlcyR0YW0pXG5wbG90KHBhY290ZXMkdGFtKVxuc3VtKHBhY290ZXMkdGFtID4gMTAwMCkgLyBsZW5ndGgocGFjb3RlcyR0YW0pXG5zdW0ocGFjb3RlcyR0YW0gPCAxMDApIC8gbGVuZ3RoKHBhY290ZXMkdGFtKVxuXG4jIERpZmljaWwgdXNhciBtw6lkaWEsIG1vZGEgb3UgbWVkaWFuYSBuZXN0ZSBjYXNvLCBvcyBkYWRvcyBlc3TDo28gZGlzdHJpYnVpZG9zIG5hcyBwb250YXMgKDMwJSBkb3MgZGFkb3Mgc8OjbyBtZW5vcmVzIG91IGlndWFzIGEgMTAwbXMgZSA2MSUgc8OjbyBtYWlvcmVzIHF1ZSAxMDAwbXMpIG9xdWUgZGlmaWN1bGRhIGEgYW5hbGlzZS5cblxuYGBgIn0= -->
+<pre class="r"><code>pacotes &lt;- read.table(&quot;./asc-dados/pacotes.dat&quot;, head=T)
+summary(pacotes$tam)
+hist(pacotes$tam, breaks = 100)
+boxplot(pacotes$tam)
+plot(pacotes$tam)
+sum(pacotes$tam &gt; 1000) / length(pacotes$tam)
+sum(pacotes$tam &lt; 100) / length(pacotes$tam)
+
+# Dificil usar média, moda ou mediana neste caso, os dados estão distribuidos nas pontas (30% dos dados são menores ou iguas a 100ms e 61% são maiores que 1000ms) oque dificulda a analise.
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGFibGUocGFjb3RlcyR0YW0pXG5zb3J0KHRhYmxlKHBhY290ZXMkdGFtKSwgZGVjcmVhc2luZyA9IFQpXG5gYGAifQ== -->
+<pre class="r"><code>table(pacotes$tam)
+sort(table(pacotes$tam), decreasing = T)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Exercicio 10</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc2diZCA8LSByZWFkLnRhYmxlKFwiLi9hc2MtZGFkb3MvdHJiZC5kYXRcIiwgaGVhZD1UKVxuaGVhZChzZ2JkKVxuaGlzdChzZ2JkJHRyLmJkKVxuc3VtbWFyeShzZ2JkJHRyLmJkKVxuQ1YgPC0gZnVuY3Rpb24oeCkgeyBzZCh4KSAvIG1lYW4oeCkgfSAjIENvZWZpZWNlbnRlIGRlIHZhcmlhw6fDo29cblxuQ1Yoc2diZCR0ci5iZClcblxuIyBWYXrDo28gbWF4aW1hIHNlcsOhIHF1YW5kbyBhIHJlc3Bvc3RhIGZvciBtaW5pbWFcbiMgNTAgY29uc3VsdGFzIHBvciBzZWd1bmRvLCBzZW5kbyBhIGNvbnN1bHRhIG1pbmltYSAyMG1zXG5cbmBgYCJ9 -->
+<pre class="r"><code>sgbd &lt;- read.table(&quot;./asc-dados/trbd.dat&quot;, head=T)
+head(sgbd)
+hist(sgbd$tr.bd)
+summary(sgbd$tr.bd)
+CV &lt;- function(x) { sd(x) / mean(x) } # Coefiecente de variação
+
+CV(sgbd$tr.bd)
+
+# Vazão maxima será quando a resposta for minima
+# 50 consultas por segundo, sendo a consulta minima 20ms
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Exercicio 11</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuKHVzZXJzJGhvcmFyaW9bbWF4KHVzZXJzJHVzZXJzKV0pXG5cbmBgYCJ9 -->
+<pre class="r"><code>(users$horario[max(users$users)])
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwiMTI6MjlcIlxuIn0= -->
+<pre><code>[1] &quot;12:29&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgTGlzdGEgZGUgYW7DoWxpc2UgZXhwbG9yYXRvcmlhCgojIyMgUXVlc3TDtWVzIDggZW0gZGlhbnRlCgo4LiAgVW0gYWRtaW5pc3RyYWRvciBkZSByZWRlIGRlY2lkaXUgbWVkaXIgbyB0ZW1wbyBkZSBjYXJnYSBkYSBww6FnaW5hIHByaW5jaXBhbCBkZSB1bSBwb3J0YWwgSW50ZXJuZXQ7IG9zIHRlbXBvcyBvYnNlcnZhZG9zLCBlbSBtaWxpc3NlZ3VuZG9zLCBlc3TDo28gbm8gYXJxdWl2byBkZSBkYWRvcyBnbG9iby5kYXQuCgpgYGB7PWh0bWx9CjwhLS0gLS0+CmBgYAooYSkgUXVhbCBvIHRlbXBvIHTDrXBpY28gZGUgY2FyZ2EgZGEgcMOhZ2luYT8KKGIpIEVzcGVyYS1zZSBxdWUgbyB0ZW1wbyBkZSBjYXJnYSBzZWphIGluZmVyaW9yIGEgNjAwIG1zIGVtIHBlbG8gbWVub3MgOTglIGRvcyBjYXNvcy4gSXNzbyBlc3TDoSBvY29ycmVuZG8gbmEgcHLDoXRpY2EKCmBgYHtyfQpnbG9ib19kYXRhIDwtIHJlYWQudGFibGUoIi4vYXNjLWRhZG9zL2dsb2JvLmRhdCIpCgpgYGAKCmBgYHtyfQpib3hwbG90KGdsb2JvX2RhdGEkVjEpCihnbG9ib19kYXRhJFYxW2dsb2JvX2RhdGEkVjEgPiAxMDAwXSkKCmBgYAoKCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUiBOb3RlYm9vayIKb3V0cHV0OiBodG1sX25vdGVib29rCi0tLQoKIyMgTGlzdGEgZGUgYW7DoWxpc2UgZXhwbG9yYXRvcmlhCgojIyMgUXVlc3TDtWVzIDggZW0gZGlhbnRlCgo4LiAgVW0gYWRtaW5pc3RyYWRvciBkZSByZWRlIGRlY2lkaXUgbWVkaXIgbyB0ZW1wbyBkZSBjYXJnYSBkYSBww6FnaW5hIHByaW5jaXBhbCBkZSB1bSBwb3J0YWwgSW50ZXJuZXQ7IG9zIHRlbXBvcyBvYnNlcnZhZG9zLCBlbSBtaWxpc3NlZ3VuZG9zLCBlc3TDo28gbm8gYXJxdWl2byBkZSBkYWRvcyBnbG9iby5kYXQuCgo8IS0tIC0tPgoKKGEpIFF1YWwgbyB0ZW1wbyB0w61waWNvIGRlIGNhcmdhIGRhIHDDoWdpbmE/CihiKSBFc3BlcmEtc2UgcXVlIG8gdGVtcG8gZGUgY2FyZ2Egc2VqYSBpbmZlcmlvciBhIDYwMCBtcyBlbSBwZWxvIG1lbm9zIDk4JSBkb3MgY2Fzb3MuIElzc28gZXN0w6Egb2NvcnJlbmRvIG5hIHByw6F0aWNhCgpgYGB7cn0KZ2xvYm9fZGF0YSA8LSByZWFkLnRhYmxlKCIuL2FzYy1kYWRvcy9nbG9iby5kYXQiKQoKYGBgCgpgYGB7cn0KYm94cGxvdChnbG9ib19kYXRhJFYxKQooZ2xvYm9fZGF0YSRWMVtnbG9ib19kYXRhJFYxID4gMTAwMF0pCgpgYGAKCmBgYHtyfQpnbG9ibzIgPC0gZ2xvYm9fZGF0YVshKGdsb2JvX2RhdGEgPT0gMCB8IGdsb2JvX2RhdGEgPiAxMDAwKV0KaGlzdChnbG9ibzIpCnN1bW1hcnkoZ2xvYm8yKQpgYGAKCmBgYHtyfQpnbG9ibzMgPC0gZ2xvYm9fZGF0YVtnbG9ib19kYXRhICE9IDBdCnN1bShnbG9ibzMgPCA2MDApIC8gbGVuZ3RoKGdsb2JvMykgCiMgUXVhc2UgOTglIGRhIHJlcXVpc8Onw7VlcyBmaWNhcmFtIGFiYWl4byBkZSA2MDBtcyBwb3JlbSBxdWFzZSBuw6NvIMOpIGZpY2FyIHJzOwpgYGAKCkV4ZXJjaWNpbyA5LgoKYGBge3J9CnBhY290ZXMgPC0gcmVhZC50YWJsZSgiLi9hc2MtZGFkb3MvcGFjb3Rlcy5kYXQiLCBoZWFkPVQpCnN1bW1hcnkocGFjb3RlcyR0YW0pCmhpc3QocGFjb3RlcyR0YW0sIGJyZWFrcyA9IDEwMCkKYm94cGxvdChwYWNvdGVzJHRhbSkKcGxvdChwYWNvdGVzJHRhbSkKc3VtKHBhY290ZXMkdGFtID4gMTAwMCkgLyBsZW5ndGgocGFjb3RlcyR0YW0pCnN1bShwYWNvdGVzJHRhbSA8IDEwMCkgLyBsZW5ndGgocGFjb3RlcyR0YW0pCgojIERpZmljaWwgdXNhciBtw6lkaWEsIG1vZGEgb3UgbWVkaWFuYSBuZXN0ZSBjYXNvLCBvcyBkYWRvcyBlc3TDo28gZGlzdHJpYnVpZG9zIG5hcyBwb250YXMgKDMwJSBkb3MgZGFkb3Mgc8OjbyBtZW5vcmVzIG91IGlndWFzIGEgMTAwbXMgZSA2MSUgc8OjbyBtYWlvcmVzIHF1ZSAxMDAwbXMpIG9xdWUgZGlmaWN1bGRhIGEgYW5hbGlzZS4KCmBgYAoKYGBge3J9CnRhYmxlKHBhY290ZXMkdGFtKQpzb3J0KHRhYmxlKHBhY290ZXMkdGFtKSwgZGVjcmVhc2luZyA9IFQpCmBgYAoKRXhlcmNpY2lvIDEwCgpgYGB7cn0Kc2diZCA8LSByZWFkLnRhYmxlKCIuL2FzYy1kYWRvcy90cmJkLmRhdCIsIGhlYWQ9VCkKaGVhZChzZ2JkKQpoaXN0KHNnYmQkdHIuYmQpCnN1bW1hcnkoc2diZCR0ci5iZCkKQ1YgPC0gZnVuY3Rpb24oeCkgeyBzZCh4KSAvIG1lYW4oeCkgfSAjIENvZWZpZWNlbnRlIGRlIHZhcmlhw6fDo28KCkNWKHNnYmQkdHIuYmQpCgojIFZhesOjbyBtYXhpbWEgc2Vyw6EgcXVhbmRvIGEgcmVzcG9zdGEgZm9yIG1pbmltYQojIDUwIGNvbnN1bHRhcyBwb3Igc2VndW5kbywgc2VuZG8gYSBjb25zdWx0YSBtaW5pbWEgMjBtcwoKYGBgCgpFeGVyY2ljaW8gMTEKCmBgYHtyfQoKdXNlcnMgPC0gcmVhZC50YWJsZSgiLi9hc2MtZGFkb3MvdXN1YXJpb3MuZGF0IiwgaGVhZD1UKQoKc3VtbWFyeSh1c2VycykKIyBNaW4gNTEuMCAKIyBNYXggMjY5LjAKCiMgSG9yYXJpb3MKCih1c2VycyRob3JhcmlvW21heCh1c2VycyR1c2VycyldKQoKYGBgCg==</div>
 
 
 
