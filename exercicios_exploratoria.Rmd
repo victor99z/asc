@@ -1,0 +1,29 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Lista de análise exploratoria
+
+### Questões 8 em diante
+
+8.  Um administrador de rede decidiu medir o tempo de carga da página principal de um portal Internet; os tempos observados, em milissegundos, estão no arquivo de dados globo.dat.
+
+```{=html}
+<!-- -->
+```
+(a) Qual o tempo típico de carga da página?
+(b) Espera-se que o tempo de carga seja inferior a 600 ms em pelo menos 98% dos casos. Isso está ocorrendo na prática
+
+```{r}
+globo_data <- read.table("./asc-dados/globo.dat")
+
+```
+
+```{r}
+boxplot(globo_data$V1)
+(globo_data$V1[globo_data$V1 > 1000])
+
+```
+
+

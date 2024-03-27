@@ -1,0 +1,77 @@
+---
+title: "Descrevendo Tempos de Resposta na Web Usando Análise Exploratória de Dados"
+author: "Victor Luiz Bernardes"
+date: '27/03/2024'
+output:
+  pdf_document: default
+  html_document: default
+---
+
+# Descrição da atividade
+
+O objetivo desta atividade é aplicar as técnicas de análise exploratória de dados (AED) vistas em aula:
+
+-   gráficos para inspeção visual (dispersão, histograma, boxplot, ...);
+-   medidas de tendência central (média, mediana, moda, quartis, percentis);
+-   medidas de dispersão (amplitude, variância, desvio padrão, coeficiente de variação).
+
+A métrica de desempenho usada será o tempo de resposta de uma aplicação web simples, conforme o enunciado. Você irá realizar diversas medições do tempo de resposta, aplicar as técnicas de AED para investigar os dados obtidos, e descrever a métrica com base nas conclusões dessa investigação.
+
+Algumas recomendações:
+
+-   Se você não estiver habituado com R Markdown, acostume-se a processar com frequência o documento, usando o botão **Knit**. Isso permitirá que eventuais erros no documento ou no código R sejam identificados rapidamente, pouco depois de terem sido cometidos, o que facilitará sua correção. Na verdade, é uma boa ideia você fazer isso **agora**, para garantir que seu ambiente esteja configurado corretamente. Se você receber uma mensagem de erro do tipo *Error in library(foo)*, isso significa que o pacote `foo` não está instalado. Para instalar um pacote, execute o comando `install.packages("foo")` no Console, ou clique em *Tools* -\> *Install Packages* no menu principal do RStudio.
+-   A seção "Análise" deste documento é o seu *playground*. Brinque nela o quanto quiser, e não preocupe-se em remover partes desnecessárias antes de entregar a atividade. Certifique-se apenas que o arquivo .Rmd pode ser processado sem erros.
+
+# Configuração
+
+Em um documento R Markdown, é praxe que o primeiro bloco (*chunk*) contenha comandos de inicialização e configuração do ambiente, como carga de pacotes. Cada bloco do documento pode receber um nome. Neste documento, o bloco de inicialização (logo abaixo) recebeu o nome de `config`, mas outro nome (ou mesmo nome nenhum) poderia ter sido usado.
+
+Como exemplo, no bloco de inicialização abaixo a linha 1 define o tamanho dos gráficos (5 polegadas de largura, aspecto 4:3), e a linha 2 atribui à variável `id` o identificador (ID) numérico usado na atividade. Se precisar, você pode acrescentar outros comandos ao bloco de inicialização.
+
+```{r config}
+knitr::opts_chunk$set(fig.width=5, fig.asp=3/4)
+id <- 99                    # substitua 99 pelo seu proprio ID
+```
+
+# Análise
+
+Nesta seção é realizada a análise gráfica e numérica dos tempos de resposta coletados no laboratório. Neste *template*, são usados alguns valores arbitrários, armazenados na variável `tempos`.
+
+```{r}
+tempos <- c(2.3, 2.8, 3.4, 4.5)
+```
+
+Recomenda-se que cada comando fique em um bloco separado. Anote suas observações sobre o resultado de cada comando ou grupo de comandos, mantendo um registro do que você estava pensando durante a análise; isso tornará mais fácil escrever as suas conclusões, evitando que você precise confiar em sua memória.
+
+Abaixo há dois exemplos (o primeiro com `hist()` e o segundo com `mean()` e `median()`); você deve adaptar esses exemplos para suas necessidades, acrescentando, modificando e/ou removendo comandos.
+
+1.  O histograma não permite concluir grande coisa.
+
+```{r}
+hist(tempos)
+```
+
+2.  A média é maior que a mediana. Será que essa diferença é relevante?
+
+```{r}
+mean(tempos)
+median(tempos)
+```
+
+# Conclusão
+
+Nesta seção do documento você deve apresentar sua análise final. Usando os conceitos vistos em aula, descreva o tempo de resposta. Atente para fatores como:
+
+-   a medida de tendência central mais apropriada;
+-   a variabilidade das medidas;
+-   se usar algum gráfico se faz necessário.
+
+Note que o objetivo não é mostrar todas as medidas de tendência e variabilidade nem incluir todos os gráficos -- o objetivo é que *você* analise os dados e apresente-os da forma mais sucinta possível que permita interpretá-los corretamente.
+
+Um exemplo de conclusão poderia ser o seguinte:[^1]
+
+[^1]: O histograma do exemplo foi incluído como uma figura, mas no seu documento você deve usar comandos do R para gerar os gráficos pertinentes.
+
+*O histograma abaixo mostra que o tempo de resposta tem distribuição assimétrica à esquerda. A mediana é de 1221 ms, e o desvio padrão de 96,1 ms. 83% dos tempos de execução mensurados ficaram entre 1100 ms e 1300 ms.*
+
+![Histograma](figs/hist-exemplo-tempos-web.jpg){width="70%"}
