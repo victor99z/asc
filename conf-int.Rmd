@@ -1,0 +1,72 @@
+---
+title: "Visualização de ICs"
+author: "Rafael Obelheiro"
+date: "2024-04-04"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(ggplot2)
+```
+
+## Introdução
+
+Este documento usa simulação para ajudar a entender e visualizar intervalos de confiança. A simulação consiste em extrair um determinado número $N_A$ de amostras de tamanho $n$ de uma população que segue uma distribuição normal com média $\mu$ e desvio padrão $\sigma$. Para cada amostra, é obtido o IC correspondente, e verificado se esse IC inclui ou não $\mu$. Para um nível de confiança $1-\alpha$, o esperado é que $(1-\alpha)N_A$ dos $N_A$ ICs contenham $\mu$ (para $N_A \to \infty$).
+
+## Parâmetros
+
+Os parâmetros da simulação são os seguintes:
+
+- `n`: tamanho (número de elementos) de cada amostra ($n$)
+- `n.ic`: número de amostras/ICs obtidos ($N_A$)
+- `media`: média da população ($\mu$)
+- `desvio`: desvio padrão da população ($\sigma$)
+- `conf.level`: nível de confiança, expresso como um número entre 0 e 1
+    * por exemplo, 0.9 para 90% de confiança
+
+Além desses parâmetros, você pode mudar também a semente aleatória da simulação mexendo no argumento de `set.seed()` no bloco abaixo.
+
+```{r}
+set.seed(1234)     # semente aleatória
+n <- 20            # tamanho de cada amostra
+n.ic <- 60         # número de ICs
+media <- 5         # média
+desvio <- 1        # desvio padrão
+conf.level <- 0.80 # nível de confiança
+```
+
+## Geração dos ICs
+
+```{r, echo = FALSE}
+#titulo <- sprintf("%d ICs %.1f%% (média=%.1f, dp=%.1f, amostras de %d elementos)", n.ic, 100*conf.level, media, desvio, n)
+titulo <- bquote( .(n.ic) ~ "ICs"~.(100*conf.level)~"% ("~mu==.(media)~", "~sigma==.(desvio)~", amostras de"~.(n)~"elementos)")
+amostras <- matrix(nrow=n.ic, ncol=n)
+xbar <- c()
+xmin <- c()
+xmax <- c()
+inclui <- c()
+for (i in 1:n.ic) {
+  amostras[i, ] <- rnorm(n, media, desvio)  # obtém uma amostra
+  ic <- t.test(amostras[i, ], conf.level = conf.level) # obtém o IC para a amostra
+  xbar[i] <- ic$estimate    # média da amostra
+  xmin[i] <- ic$conf.int[1] # limite inferior do IC
+  xmax[i] <- ic$conf.int[2] # limite superior do IC
+  # determina se IC inclui ou não a média da população
+  if (media < xmin[i] || media > xmax[i])
+    inclui[i] <- "N"
+  else
+    inclui[i] <- "S"
+}
+# monta um data frame com média, IC e determinação de inclusão para cada amostra
+df <- data.frame(xbar, xmin, xmax, inclui=as.factor(inclui))
+# plota os ICs, destacando os que não incluem a média
+ggplot(df, aes(x=xbar, y=1:n.ic, color=inclui)) + geom_point() +   geom_errorbar(aes(xmin=xmin, xmax=xmax, color=inclui)) + xlab("IC para a média de x") + ylab("índice") + ggtitle(titulo)
+# quantas amostras não incluem a média populacional?
+nao.incl <- sum(df$inclui == "N")
+```
+
+De `r n.ic` ICs gerados, `r nao.incl` **não** incluem a média (o esperado seria `r (1-conf.level)*n.ic`).
+
