@@ -1,0 +1,113 @@
+---
+title: "exer-lab"
+author: "Victor"
+date: "2024-04-10"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+#dados <- c(3.57165, 3.47564, 4.40407, 3.93884, 2.90697)
+dados <- c(3.49750, 3.43161, 3.98628, 3.58919, 3.70863)
+
+summary(dados)
+(coef <- qt(0.975, 4))
+
+media <- mean(dados)
+desvio <- sd(dados)
+
+
+
+(n = ((coef * desvio) / (0.04 * media))**2)
+
+```
+
+
+```{r}
+# t.test(all, 0.95)
+
+(calc <- media + c(-1,1)*coef*desvio/sqrt(18))
+
+```
+
+```{r}
+# 3.070788 4.214496
+(err1 <- (calc[2] - media) / media)
+(err2 <- (media - calc[1]) / media)
+
+```
+
+# Para 18 amostras
+
+```{r}
+
+dados2 <- c(3.33405, 3.60228, 3.81772, 3.72070, 3.14849, 3.99388, 4.26469,
+4.97610,
+3.70669,
+3.60915,
+3.98653,
+4.41098,
+3.91472)
+
+all <- c(dados, dados2)
+
+coef <- qt(0.975, length(all) -1 )
+
+
+(calc <- mean(all) + c(-1,1)*coef*sd(all)/sqrt(length(all)))
+
+(err1 <- ((calc[2] - mean(all)) / mean(all)))
+(err2 <- ((mean(all) - calc[1]) / mean(all)))
+
+
+(n_again = ((coef * sd(all)) / (0.04 * mean(all)))**2)
+
+```
+
+Para 35 amostras
+
+```{r}
+
+dados3 <- c(3.37856,
+4.02976,
+3.35133,
+3.44646,
+3.36094,
+3.65466,
+3.97125,
+3.75862,
+4.04101,
+3.68190,
+3.84356,
+4.11843,
+3.52429,
+3.60594,
+3.81377,
+3.80147,
+3.21092)
+
+all2 <- c(all, dados3)
+
+coef <- qt(0.975, length(all2) -1)
+
+
+(calc <- mean(all2) + c(-1,1)*coef*sd(all2)/sqrt(length(all2)))
+
+(err1 <- ((calc[2] - mean(all2)) / mean(all2)))
+(err2 <- ((mean(all2) - calc[1]) / mean(all2)))
+
+
+(n_again = ((coef * sd(all2)) / (0.04 * mean(all2)))**2)
+
+
+hist(dados)
+hist(dados + dados2)
+hist(dados3)
+
+
+```
