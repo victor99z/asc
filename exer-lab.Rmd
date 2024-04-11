@@ -69,7 +69,7 @@ coef <- qt(0.975, length(all) -1 )
 
 ```
 
-Para 35 amostras
+# Para 35 amostras
 
 ```{r}
 
@@ -106,8 +106,8 @@ coef <- qt(0.975, length(all2) -1)
 
 
 hist(dados)
-hist(dados + dados2)
-hist(dados3)
+hist(c(dados, dados2))
+hist(c(dados, dados2, dados3))
 
 
 ```
