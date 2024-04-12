@@ -1,0 +1,44 @@
+# Exercicios de comparação entre alternativas 
+
+
+
+```{r}
+
+new <- read.table('./asc-dados/exer001')
+
+atual <- new$V2
+novo <- new$V3
+ic <- 0.95
+
+#t.test(atual, 0.90)
+#t.test(novo, 0.90)
+
+n <- length(atual)
+
+# nc <- 1 - ic
+# alfa <- 1-nc
+# z <- qt(1-alfa/2, n0-1)
+
+z <- qt(0.95, n-1) ; z
+
+# Calcular o nivel de confiança para a média das diferenças
+
+meanDiff <- mean(atual - novo); meanDiff
+
+desvio <- sd(atual - novo); desvio
+
+ic <- meanDiff + c(-1, 1) * z * desvio/sqrt(n); ic
+
+
+```
+
+
+# t.test para 2 variaveis
+
+```{r}
+S1 <- c(299.8, 305.4, 325.1, 289.3, 299.3, 297.7, 306.2, 320.4)
+S2 <- c(294.8, 323.6, 294.6, 300.4, 304.1, 303.9, 286.4, 314.9)
+t.test(S1, S2, conf.level=0.9)
+
+
+```
