@@ -1,13 +1,13 @@
 # Exercicios de comparação entre alternativas 
 
-
+# Q01 (teste pareado)
 
 ```{r}
 
-new <- read.table('./asc-dados/exer001')
+new <- read.table('./asc-dados/exer001', header = T)
 
-atual <- new$V2
-novo <- new$V3
+atual <- new$atual
+novo <- new$novo
 ic <- 0.95
 
 #t.test(atual, 0.90)
@@ -23,7 +23,7 @@ z <- qt(0.95, n-1) ; z
 
 # Calcular o nivel de confiança para a média das diferenças
 
-meanDiff <- mean(atual - novo); meanDiff
+meanDiff <- mean(novo - atual); meanDiff
 
 desvio <- sd(atual - novo); desvio
 
@@ -32,13 +32,25 @@ ic <- meanDiff + c(-1, 1) * z * desvio/sqrt(n); ic
 
 ```
 
+# Q002  - Não pareado (nao tem amostra suficiente + medindo duas coisas diferentes e comparando algo)
 
 # t.test para 2 variaveis
 
 ```{r}
 S1 <- c(299.8, 305.4, 325.1, 289.3, 299.3, 297.7, 306.2, 320.4)
 S2 <- c(294.8, 323.6, 294.6, 300.4, 304.1, 303.9, 286.4, 314.9)
-t.test(S1, S2, conf.level=0.9)
+
+z <- qt(0.975, 10); z
+
+xbar <- s1 - s2; xbar
+
+
+
+```
+
+# Q 003 (proporção)
+
+```{r}
 
 
 ```

@@ -1,0 +1,47 @@
+---
+title: "ANOVA"
+author: "Victor"
+date: "2024-04-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+
+dados <- read.table("./anova-dataset", header=T)
+
+df <- data.frame(dados)
+
+dados_stack <- stack(df); dados_stack
+
+anova <- aov(values ~ ind, data=dados_stack); anova
+summary(anova)
+
+```
+
+## Exercicios
+
+```{r}
+
+k <- 6
+n <- 10
+
+SSA <- 5
+SSE <- 15
+
+# SSA / k-1 
+sa_quad <- SSA/(k-1); sa_quad
+se_quad <- SSE/k*(n-1); se_quad
+
+f_calc <- (sa_quad / se_quad); f_calc
+
+# 0.95;5;54
+f_critico <- qf(0.95, 5, 54); f_critico
+
+
+# f_calc > f_crit = existem dif. estatisticamente significativas
+```
