@@ -44,4 +44,6 @@ f_critico <- qf(0.95, 5, 54); f_critico
 
 
 # f_calc > f_crit = existem dif. estatisticamente significativas
+
+# Alocação de variação
 ```
