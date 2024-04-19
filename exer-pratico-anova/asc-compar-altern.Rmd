@@ -1,0 +1,145 @@
+---
+title: "Comparação de Alternativas"
+author: "Coloque seu nome aqui"
+date: 'Data de entrega: 19/04/2024'
+output:
+  pdf_document: default
+  word_document: default
+  html_document: default
+---
+
+# Descrição da atividade
+
+O objetivo desta atividade é aplicar as técnicas de comparação de alternativas. A atividade é dividida em duas partes:
+
+1. Comparação usando ICs vs. teste _t_
+2. Comparação de múltiplas alternativas
+
+Algumas recomendações:
+
+- Se você não estiver habituado com R Markdown, acostume-se a processar com frequência o  documento, usando o botão **Knit**. Isso permitirá que eventuais erros no documento ou no código R sejam identificados rapidamente, pouco depois de terem sido cometidos, o que facilitará sua correção. Na verdade, é uma boa ideia você fazer isso **agora**, para garantir que seu ambiente esteja configurado corretamente. Se você receber uma mensagem de erro do tipo _Error in library(foo)_, isso significa que o pacote `foo` não está instalado. Para instalar um pacote, execute o comando `install.packages("foo")` no Console, ou clique em _Tools_ -> _Install Packages_.
+- Após concluir a atividade, você deverá submeter no Moodle um arquivo ZIP contendo:
+    * o arquivo fonte .Rmd;
+    * a saída processada (PDF ou HTML) do arquivo .Rmd;
+    * o arquivo de dados referente à Parte 2, que é necessário para o processamento do .Rmd. 
+
+# Configuração 
+
+Nesta atividade, a única configuração necessária consiste em carregar o pacote `ggplot2` e o arquivo `compar-altern.R`, que são usados na Parte 1 da atividade.
+
+```{r config}
+library(ggplot2)
+source("compar-altern.R")
+```
+
+
+# Parte 1: Comparação usando ICs vs. teste _t_
+
+Uma das formas de determinar se duas variáveis são estatisticamente diferentes é observando os seus intervalos de confiança. Existem três resultados possíveis para essa comparação:
+
+1. _Não existe sobreposição entre os ICs._ Nesse caso, a diferença entre as variáveis **é** estatisticamente significativa.  
+1. _Existe sobreposição entre os ICs, e ao menos um deles inclui a média da outra variável._ Nesse caso, a diferença entre as variáveis **não é** estatisticamente significativa.
+3. _Existe sobreposição entre os ICs, mas nenhum deles inclui a média da outra variável._ Nesse caso não é possível afirmar nada, sendo necessário realizar um teste _t_ (ou equivalente) para determinar se a diferença é estatisticamente significativa.
+
+O gráfico abaixo ilustra os três resultados. As variáveis comparadas são as colunas A--F do conjunto de dados contido no arquivo `comparacao-ic.dat`, e os ICs têm um nível de confiança de 95%. As conclusões visuais são as seguintes:
+
+1. As variáveis A e B possuem diferença estatisticamente significativa, e A < B.
+2. As variáveis C e D não possuem diferença estatisticamente significativa.
+3. Não é possível afirmar se E < F ou não, é preciso realizar um teste _t_ para ver se a diferença é estatisticamente significativa.
+
+```{r p1-graf-ic}
+dados <- read.table("comparacao-ic.dat", head=TRUE)
+dados.ic <- geraIC(dados)
+plotaIC(dados.ic)
+```
+
+Para esta primeira parte, você deve comparar os pares de variáveis representados no gráfico (A/B, C/D, E/F) usando o teste _t_ com um nível de confiança de 95% (o mesmo usado para gerar os ICs). Para cada par de variáveis, indique claramente (a) o resultado da comparação (ou seja, se as variáveis são ou não estatisticamente diferentes) e (b) se esse resultado é idêntico ao obtido pela comparação visual dos ICs. Considere que as observações não são pareadas.
+
+### Análise e respostas
+
+```{r p1-analise}
+
+dados_stacked <- stack(dados); dados_stacked
+dados.aov <- aov(values ~ ind, data = dados_stacked);
+res_anova <- anova(dados.aov); summary(res_anova)
+
+dados.hsd.95 <- TukeyHSD(dados.aov, conf.level = 0.95); dados.hsd.95
+plot(dados.hsd.95, las = 2)
+
+# Parte correta :x
+
+ab_test <- t.test(dados$A, dados$B, conf.level = 0.95);ab_test
+cd_test <- t.test(dados$C, dados$D, conf.level = 0.95);cd_test
+ef_test <- t.test(dados$E, dados$F, conf.level = 0.95);ef_test
+
+```
+
+_Respostas aqui_
+
+Resultados com p < 0.05
+
+B-A: Há uma variação significativa entre as alternativas B-A devido a p < 0.05 (0.0001202), resultado identico ao visual
+C-D: Não há variação significativa entre as alternativas C-D devido a p > 0.05 (0.5499), resultado identico ao visual
+E-F: Não há variação significativa entre as alternativas C-D devido a p > 0.05 (0.0549), intevalo de confiança ficou bem proximo de 0 na parte superior porem ainda passa em zero, ou seja, não possui variação significativa
+
+
+
+
+# Parte 2: Comparação de três algoritmos de ordenação
+
+Na segunda parte iremos comparar o tempo de execução de três algoritmos de ordenação, _QuickSort_, _MergeSort_ e _HeapSort_. Esses três algoritmos têm complexidade $O(n \log n)$ no caso médio, e são considerados eficientes. Para essa comparação iremos usar tempos de execução medidos pelo script Python `sortcomp3.py`. Esse script mede o tempo que cada algoritmo leva para ordenar um vetor de `n` elementos (em uma rodada, cada algoritmo ordena um vetor diferente, sempre de tamanho `n`). O número de rodadas pode ser passado como parâmetro na linha de comando (por _default_ são realizadas 3 rodadas). A cada rodada os elementos do vetor sofrem uma permutação aleatória; logo, é possível (mas pouco provável) que o vetor esteja (quase) em ordem (de)crescente. 
+
+O script pode ser executado no RStudio, incluindo a versão Cloud. Na janela inferior esquerda, normalmente usada para o console, há uma aba Terminal, na qual você pode executar comandos do Linux. 
+
+Neste experimento, primeiro execute o script usando o comando `python sortcomp3.py 2`. O número de rodadas (2, no exemplo) fica a seu critério. 
+
+A seguir, faça uma análise de variância adotando um nível de confiança de 95%, e responda aos seguintes itens:
+
+1. Qual a porcentagem de variação que pode ser explicada pelas alternativas e qual a porcentagem explicada pelo ruído das medições?
+2. Mostre a tabela ANOVA (conforme o esquema abaixo) e determine se existem diferenças estatisticamente significativas entre os tempos médios de resposta de cada algoritmo. 
+    
+    Fonte de variação  | Alternativas | Erros | Total
+    -------------------+--------------+-------+-------
+    Soma de quadrados  |              |       | 
+    Graus de liberdade |              |       | 
+    Média quadrática   |              |       | 
+    _F_ calculado      |              |       | 
+    _F_ crítico        |              |       | 
+
+3. Caso a ANOVA indique que há diferenças estatisticamente significativas, ranqueie os algoritmos de acordo com o seu tempo médio de resposta (use o teste de Tukey).
+
+Lembre-se que os tempos de execução dos algoritmos devem ser salvos em um arquivo de dados para que sua análise seja reproduzível. Para facilitar essa tarefa, o script já gera a saída em um formato apropriado; você pode redirecionar a saída do script para um arquivo (por exemplo, `python sortcomp3.py 2 >parte2.dat`) ou simplesmente criar o arquivo de dados no próprio editor do RStudio (crie um novo arquivo texto e cole a saída do script).
+
+### Análise e respostas
+
+```{r p2-analise}
+
+
+dados <- read.table("sort-comp.dat", head=TRUE)
+
+dados_stacked <- stack(dados); dados_stacked
+dados.aov <- aov(values ~ ind, data = dados_stacked); dados.aov
+res_anova <- anova(dados.aov); res_anova
+
+dados.hsd.95 <- TukeyHSD(dados.aov, conf.level = 0.95); dados.hsd.95; 
+plot(dados.hsd.95, las = 2)
+
+
+```
+## Análise exer 002
+
+Numero de rodadas: 10
+Numero de var: 3
+
+
+    Fonte de variação  | Alternativas | Erros  | Total
+    -------------------+--------------+-------+-------
+    Soma de quadrados  | 1.05945      | 0.023  | 
+    Graus de liberdade | 2            | 27     | 
+    Média quadrática   | 0.52972      | 0.0008 |       | 
+    _F_ calculado      |              |        | 
+    _F_ crítico        |              |        | 
+
+
+_Respostas aqui_
+
